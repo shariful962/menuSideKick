@@ -15,6 +15,7 @@ import feedbackDefault from '../assets/sidebar/feedbackDefault.svg'
 import feedbackWhite from '../assets/sidebar/feedbackWhite.svg'
 import subsDef from '../assets/sidebar/subscriptionDefault.svg'
 import subsWhite from '../assets/sidebar/subscriptionWhite.svg'
+import SigninLogo from '../assets/singinLogo.svg'
 
 
 
@@ -37,5 +38,6 @@ export const Icons = {
     feedbackDef: feedbackDefault,
     feedbackWhite: feedbackWhite,
     subsDef: subsDef,
-    subsWhite: subsWhite
+    subsWhite: subsWhite,
+    SigninLogo: SigninLogo
 }
