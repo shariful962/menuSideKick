@@ -109,7 +109,6 @@
 
 // export default Signin;
 
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { FiEye, FiEyeOff } from "react-icons/fi";
@@ -138,13 +137,17 @@ const Signin = () => {
     e.preventDefault();
     if (!formData.email && !formData.password) {
       setErrorMessage("Both fields are required");
+      return;
     } else if (!formData.email) {
       setErrorMessage("Please enter your email");
+      return;
     } else if (!formData.password) {
       setErrorMessage("Please enter your password");
+      return;
     } else {
       // clear error
-      setErrorMessage(""); 
+      setErrorMessage("");
+      navigate("/dashboard");
       console.log("Signed in successfully ");
       console.log("Remember me:", formData.rememberMe);
     }
@@ -152,7 +155,7 @@ const Signin = () => {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="w-full max-w-[691px] mx-auto">
+      <div className="w-full max-w-[691px] mx-auto px-4">
         <div className="text-center space-y-8 mb-4">
           <img
             src={Icons.SigninLogo}
@@ -239,4 +242,3 @@ const Signin = () => {
 };
 
 export default Signin;
-

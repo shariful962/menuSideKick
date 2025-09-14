@@ -1,35 +1,108 @@
+// import React, { useState } from "react";
+// import { useNavigate } from "react-router";
+// import { Icons } from "../../lib/images";
+// import ForgotPassword from "../../components/auth/ForgotPassword";
+// import UpdatePassword from "../../components/auth/UpdatePassword";
+// import VerifyCode from "../../components/auth/VerifyCode";
+
+// const ForgotPass = ({initialStep,initialEmail}) => {
+//   const [step, setStep] = useState(initialStep || "email")
+//     const [email, setEmail ] = useState(initialEmail || "")
+//     const [otp, setOtp] = useState("")
+//     const [newPassword, setNewPassword] = useState("")
+//     const navigate = useNavigate()
+
+//      // email function
+//     const handleEmailSent = ()=>{
+//         setStep('verify')
+//     }
+
+//     const handleOtp = ()=>{
+//         setStep('reset')
+//     }
+
+//     const handleSetPassword = ()=>{
+//         navigate('/signin')
+//     }
+
+//   return (
+//     <div className="flex items-center justify-center h-screen">
+//       <div className="w-full max-w-[691px] mx-auto px-4">
+//         <div className="text-center space-y-8 mb-4">
+//           <img
+//             src={Icons.SigninLogo}
+//             alt="sign_in logo"
+//             className="w-[150px] inline-block"
+//           />
+//           <h1 className="text-[32px] md:[48px] lg:[64px] font-EBGaramond font-bold text-textClr tracking-widest">
+//             Menu Sidekick
+//           </h1>
+//         </div>
+
+//         {/* function  */}
+//       {step === 'email' && (
+//         <ForgotPassword
+//          email={email}
+//          setEmail = {setEmail}
+//          onSubmit = {handleEmailSent}
+
+//          />
+//       )}
+
+//       {step === 'verify' && (
+//         <VerifyCode
+//          email ={email}
+//          otp = {otp}
+//          setOtp = {setOtp}
+//          onSubmit = {handleOtp}
+
+//         />
+//       )}
+
+//       {step === 'reset' && (
+//         <UpdatePassword
+//          newPassword = {newPassword}
+//          setNewPassword = {setNewPassword}
+//          onSubmit = {handleSetPassword}
+//         />
+//       )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ForgotPass;
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Icons } from "../../lib/images";
+import ForgotPassword from "../../components/auth/ForgotPassword";
+import UpdatePassword from "../../components/auth/UpdatePassword";
+import VerifyCode from "../../components/auth/VerifyCode";
 
-const ForgotPass = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+const ForgotPass = ({ initialStep, initialEmail }) => {
+  const [step, setStep] = useState(initialStep || "email");
+  const [email, setEmail] = useState(initialEmail || "");
+  const [otp, setOtp] = useState("");
+  // const [newPassword, setNewPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  // email function
+  const handleEmailSent = () => {
+    setStep("verify");
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-   if (!formData.email) {
-      setErrorMessage("Email is Required");
-    }  else {
-      setErrorMessage(""); // clear error
-      
-    }
+  const handleOtp = () => {
+    setStep("reset");
+  };
+
+  const handleSetPassword = () => {
+    navigate("/signin");
   };
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="w-full max-w-[691px] mx-auto">
+      <div className="w-full max-w-[691px] mx-auto px-4">
         <div className="text-center space-y-8 mb-4">
           <img
             src={Icons.SigninLogo}
@@ -40,36 +113,32 @@ const ForgotPass = () => {
             Menu Sidekick
           </h1>
         </div>
-        <h1 className="font-bold font-EBGaramond text-textClr text-2xl md:text-[28px] lg:text-[2rem]" >Forget password</h1>
-        <p className="text-textClr mt-3 mb-8">Enter your email address to ger a verification code for resetting your password.</p>
-        <form onSubmit={handleSubmit}>
-          {/* email  */}
-          <div className="mb-6">
-            <label className="label-control">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="form-control"
-              placeholder="abc@gmail.com"
-            />
-          </div>
 
-          {errorMessage && (
-            <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
-          )}
+        {/* function  */}
+        {step === "email" && (
+          <ForgotPassword
+            email={email}
+            setEmail={setEmail}
+            onSubmit={handleEmailSent}
+          />
+        )}
 
-          {/* Submit */}
-          <div className="text-center mt-8">
-            <button
-              type="submit"
-              className="w-full h-[50px]  bg-Secondary text-white py-2 text-xl font-bold rounded-md hover:bg-[#c45e38] transition cursor-pointer"
-            >
-             Send
-            </button>
-          </div>
-        </form>
+        {step === "verify" && (
+          <VerifyCode
+            email={email}
+            // otp={otp}
+            setOtp={setOtp}
+            onSubmit={handleOtp}
+          />
+        )}
+
+        {step === "reset" && (
+          <UpdatePassword
+            // newPassword={newPassword}
+            // setNewPassword={setNewPassword}
+            onSubmit={handleSetPassword}
+          />
+        )}
       </div>
     </div>
   );

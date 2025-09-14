@@ -56,3 +56,48 @@ const Settings = () => {
 };
 
 export default Settings;
+
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+
+// const AudioPlayer = () => {
+//   const [audioUrl, setAudioUrl] = useState(null);
+//   const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3OTEwMzM4LCJpYXQiOjE3NTc3OTAzMzgsImp0aSI6Ijg2ZmIyNzRjZGE2ZjQ1NTNiZTAxZDNlYzk5NTkxNTY3IiwidXNlcl9pZCI6IjUifQ.WFZQ5bYnLpBVye5oVLVaz2C7CLTTpawcf1EYhfDIIe4";
+
+//   useEffect(() => {
+//     const fetchAudio = async () => {
+//       try {
+//         const response = await axios.get(
+//           "http://10.10.7.24:8000/api/core/audio/preview/83848268-5d10-4644-9a13-7d7567791bfd/?lang=en",
+//           {
+//             headers: {
+//               Authorization: `Bearer ${token}`,
+//             },
+//             responseType: "blob", // important for binary data
+//           }
+//         );
+
+//         // Convert blob to URL for audio playback
+//         const url = URL.createObjectURL(response.data);
+//         setAudioUrl(url);
+//       } catch (error) {
+//         console.error("Error fetching audio:", error);
+//       }
+//     };
+
+//     fetchAudio();
+//   }, []);
+
+//   return (
+//     <div>
+//       {audioUrl ? (
+//         <audio controls src={audioUrl}></audio>
+//       ) : (
+//         <p>Loading audio...</p>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AudioPlayer;
+

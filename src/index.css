@@ -18,6 +18,9 @@
 .flexCenter {
   @apply flex items-center justify-center
 }
+.flexBetween {
+  @apply flex items-center justify-between
+}
 .label-control {
   @apply block text-textClr text-lg mb-2
 }
