@@ -16,6 +16,7 @@ import feedbackWhite from '../assets/sidebar/feedbackWhite.svg'
 import subsDef from '../assets/sidebar/subscriptionDefault.svg'
 import subsWhite from '../assets/sidebar/subscriptionWhite.svg'
 import SigninLogo from '../assets/singinLogo.svg'
+import fileUpload from '../assets/fileupload.svg'
 
 
 
@@ -39,5 +40,6 @@ export const Icons = {
     feedbackWhite: feedbackWhite,
     subsDef: subsDef,
     subsWhite: subsWhite,
-    SigninLogo: SigninLogo
+    SigninLogo: SigninLogo,
+    fileUpload: fileUpload
 }

@@ -22,16 +22,18 @@ const ChangePassword = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  if (formData.newPassword !== formData.confirmNewPassword) {
-    setErrorMessage("Passwords do not match!");
-    console.log("Passwords do not match"); // Debugging log
-  } else {
-    setErrorMessage(""); // clear error
-    console.log("Password changed successfully");
-  }
-};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.newPassword !== formData.confirmNewPassword) {
+      setErrorMessage("Passwords do not match!");
+      console.log("Passwords do not match"); // Debugging log
+      return 
+    } else {
+      setErrorMessage(""); // clear error
+      console.log("Password changed successfully");
+      navigate('/settings')
+    }
+  };
 
   return (
     <div className="p-4 bg-Primary min-h-[calc(100vh-100px)] px-4">
@@ -43,7 +45,7 @@ const handleSubmit = (e) => {
           <h1 className="title text-white">Change Password</h1>
         </div>
 
-        <div className="max-w-[691px] mx-auto mt-10">
+        <div className="max-w-[691px] mx-auto mt-10 px-4">
           <form onSubmit={handleSubmit}>
             {/* current password  */}
             <div className="relative mb-4">
@@ -61,7 +63,11 @@ const handleSubmit = (e) => {
                 onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                 className="absolute right-3 top-[50px] text-gray-400"
               >
-                {showCurrentPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+                {showCurrentPassword ? (
+                  <FiEyeOff size={20} />
+                ) : (
+                  <FiEye size={20} />
+                )}
               </button>
             </div>
             {/* new password  */}
@@ -96,41 +102,42 @@ const handleSubmit = (e) => {
               />
               <button
                 type="button"
-                onClick={() => setShowConfirmNewPassword(!showConfirmNewPassword)}
+                onClick={() =>
+                  setShowConfirmNewPassword(!showConfirmNewPassword)
+                }
                 className="absolute right-3 top-[50px] text-gray-400"
               >
-                {showConfirmNewPassword ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+                {showConfirmNewPassword ? (
+                  <FiEyeOff size={20} />
+                ) : (
+                  <FiEye size={20} />
+                )}
               </button>
             </div>
-             <div className="flex justify-end mt-2">
-    <button
-      type="button"
-      onClick={() => navigate("/forgot-password")}
-      className="text-sm text-[#14B8A6] hover:underline"
-    >
-      Forgot Password?
-    </button>
-  </div>
-
-            
-
-           
+            <div className="flex justify-end mt-2">
+              <button
+                type="button"
+                onClick={() => navigate("/forgotpass")}
+                className="text-sm text-[#14B8A6] hover:underline"
+              >
+                Forgot Password?
+              </button>
+            </div>
 
             {errorMessage && (
               <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
             )}
 
             {/* Submit */}
-          <div className="text-center mt-8">
-            <button
-            type="submit"
-            className="w-full h-[50px]  bg-Secondary text-white py-2 text-xl font-bold rounded-md hover:bg-[#c45e38] transition cursor-pointer"
-          >
-            Change Password
-          </button>
-          </div>
+            <div className="text-center mt-8">
+              <button
+                type="submit"
+                className="w-full h-[50px]  bg-Secondary text-white py-2 text-xl font-bold rounded-md hover:bg-[#c45e38] transition cursor-pointer"
+              >
+                Change Password
+              </button>
+            </div>
           </form>
-          
         </div>
       </div>
     </div>

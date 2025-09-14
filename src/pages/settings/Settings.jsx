@@ -31,7 +31,7 @@ const Settings = () => {
           </Link>
         </div>
         <div className="px-4 lg:px-8 transition-all hover:bg-gray-100 duration-300">
-          <Link to={"/dashboard"}>
+          <Link to={"/settings/terms"}>
             <div className="settings-menu">
               <span className="text-lg md:text-xl lg:text-2xl text-[#090B0E]">
                 Terms & Conditions
@@ -41,7 +41,7 @@ const Settings = () => {
           </Link>
         </div>
         <div className="px-4 lg:px-8 hover:bg-gray-100 duration-300">
-          <Link to={"/dashboard"}>
+          <Link to={"/settings/about"}>
             <div className="settings-menu ">
               <span className="text-lg md:text-xl lg:text-2xl text-[#090B0E]">
                 About Us

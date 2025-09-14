@@ -14,6 +14,7 @@ import CreateAdmin from "./pages/create admin/CreateAdmin";
 import Dashboard from "./pages/dashboard/Dashboard";
 import ChangePassword from "./pages/settings/ChangePassword"
 import Privacy from "./pages/settings/Privacy";
+import TermsAndCondition from "./pages/settings/TermsAndCondition";
 
 
 
@@ -43,7 +44,7 @@ export const router = createBrowserRouter([
         {path: 'settings', Component: Settings},
         {path: 'settings/changepass', Component: ChangePassword},
         {path: 'settings/privacy', Component: Privacy},
-        {path: 'settings/terms', Component: ChangePassword},
+        {path: 'settings/terms', Component: TermsAndCondition},
         {path: 'settings/about', Component: ChangePassword},
         
     ]

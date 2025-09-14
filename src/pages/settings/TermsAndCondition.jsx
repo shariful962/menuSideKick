@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { Icons } from "../../lib/images";
 import { BsTextCenter, BsTextLeft, BsTextRight } from "react-icons/bs";
 
-const Privacy = () => {
+const TermsAndCondition = () => {
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [privacyText, setPrivacyText] = useState(
@@ -40,7 +40,7 @@ const Privacy = () => {
             <button onClick={() => navigate("/settings")}>
               <GoArrowLeft size={24} />
             </button>
-            <h1 className="title text-white">Privacy Policy</h1>
+            <h1 className="title text-white">Terms & Conditions</h1>
           </div>
           <button
             onClick={() => navigate("/settings")}
@@ -154,7 +154,7 @@ const Privacy = () => {
                   className={`p-1 rounded-md ${
                     alignment === "left"
                       ? "bg-Secondary text-white"
-                      : "hover:bg-gray-100 text-Secondary"
+                      : "hover:bg-gray-100 text-gray-700"
                   }`}
                   title="Align left"
                 >
@@ -167,7 +167,7 @@ const Privacy = () => {
                   className={`p-1 rounded-md ${
                     alignment === "center"
                       ? "bg-Secondary text-white"
-                      : "hover:bg-gray-100 text-Secondary"
+                      : "hover:bg-gray-100 text-gray-700"
                   }`}
                   title="Align center"
                 >
@@ -179,7 +179,7 @@ const Privacy = () => {
                   className={`p-1 rounded-md ${
                     alignment === "right"
                       ? "bg-Secondary text-white"
-                      : "hover:bg-gray-100 text-Secondary"
+                      : "hover:bg-gray-100 text-gray-700"
                   }`}
                   title="Align right"
                 >
@@ -194,4 +194,4 @@ const Privacy = () => {
   );
 };
 
-export default Privacy;
+export default TermsAndCondition;
