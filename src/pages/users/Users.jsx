@@ -195,7 +195,7 @@ const Users = () => {
 
   const handleBlock = (user) => {
     console.log("Blocked user:", user);
-    // setSelectedUser(null);
+    setSelectedUser(null);
   };
 
   return (
