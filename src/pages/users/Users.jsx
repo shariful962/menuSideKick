@@ -203,24 +203,33 @@ const Users = () => {
       {/* Table Section */}
       <div className="bg-white shadow-custom rounded-[10px] mt-5 min-h-[calc(100vh-155px)]">
         {/* Header */}
-        <div className="bg-Secondary px-6 py-4 rounded-tl-[10px] rounded-tr-[10px] flex flex-col md:flex-row justify-between items-center gap-2">
-          <h2 className="title text-white">User List</h2>
-          <div className="flex gap-x-4">
-            <div className="flex items-center w-full md:w-[300px] h-[42px] px-3 py-2 bg-white border border-Primary rounded-sm">
-              <Search className="w-5 h-5 mr-2" />
-              <input
-                type="text"
-                placeholder="Search User"
-                className="w-full outline-none text-sm text-gray-700"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </div>
-            <button className="h-[42px] px-6 py-2 bg-white text-Secondary rounded font-bold">
-              Blocked Users
-            </button>
-          </div>
-        </div>
+       <div className="bg-Secondary px-6 py-4 rounded-tl-[10px] rounded-tr-[10px]">
+                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                   <div>
+                     <h2 className="title text-white">User List</h2>
+                   </div>
+                   <div className="flex flex-col md:flex-row gap-y-2  gap-x-8">
+                     {/* search button  */}
+                     <div className="flex items-center w-full md:w-[300px] h-[42px] px-3 py-2 bg-white border border-Primary  rounded-sm">
+                       <Search className=" w-5 h-5 mr-2" />
+                       <input
+                         type="text"
+                         placeholder="Search User"
+                         className="w-full outline-none text-sm text-gray-700"
+                         value={search}
+                         onChange={(e) => setSearch(e.target.value)}
+                       />
+                     </div>
+       
+                     {/* manage button  */}
+                     <div>
+                       <button className="h-[42px] px-6 w-max py-2 bg-white text-Secondary rounded cursor-pointer font-bold">
+                        Blocked Users
+                       </button>
+                     </div>
+                   </div>
+                 </div>
+               </div>
 
         {/* Users Table */}
         <div className="mt-7.5 overflow-x-auto px-4">
