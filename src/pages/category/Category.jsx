@@ -1,13 +1,15 @@
-
 import React, { useState } from "react";
 import { Icons } from "../../lib/images";
 import { initalProducts } from "./data";
 import CategoryModal from "./CategoryModal";
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
 const Category = () => {
   const [activeCategory, setActiveCategory] = useState("diet");
   const [products, setProducts] = useState(initalProducts);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
 
   const buttonLists = [
     { id: 1, name: "Diet", value: "diet" },
@@ -21,9 +23,18 @@ const Category = () => {
     ? products.filter((p) => p.category === activeCategory)
     : products;
 
-  const handleDelete = (id) => {
-    const newProducts = products.filter((p) => p.id !== id);
+  // when delete button clicked
+  const handleDeleteClick = (id) => {
+    setDeleteId(id);
+    setIsDeleteModalOpen(true);
+  };
+
+ // confirm delete
+  const handleConfirmDelete = () => {
+    const newProducts = products.filter((p) => p.id !== deleteId);
     setProducts(newProducts);
+    setIsDeleteModalOpen(false);
+    setDeleteId(null);
   };
 
   const handleAddCategory = (newCategory) => {
@@ -106,7 +117,7 @@ const Category = () => {
                     <td className="px-4 py-3 flex items-center gap-x-2">
                       <button
                         className="cursor-pointer"
-                        onClick={() => handleDelete(p.id)}
+                        onClick={() => handleDeleteClick(p.id)}
                       >
                         <img src={Icons.delet} alt="delete icon" />
                       </button>
@@ -132,6 +143,12 @@ const Category = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleAddCategory}
+      />
+      {/* Confirm Delete Modal */}
+      <ConfirmDeleteModal
+        isOpen={isDeleteModalOpen}
+        onCancel={() => setIsDeleteModalOpen(false)}
+        onConfirm={handleConfirmDelete}
       />
     </div>
   );
