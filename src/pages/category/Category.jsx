@@ -149,6 +149,7 @@ const Category = () => {
         isOpen={isDeleteModalOpen}
         onCancel={() => setIsDeleteModalOpen(false)}
         onConfirm={handleConfirmDelete}
+        product={products.find((p) => p.id === deleteId)}
       />
     </div>
   );

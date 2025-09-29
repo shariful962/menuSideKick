@@ -35,3 +35,13 @@
 .settings-menu {
   @apply flex justify-between items-center py-3 cursor-pointer border-b border-gray-300;
 }
+
+/* confirmation modal  */
+
+.confirmYes {
+  @apply px-4 py-2 rounded bg-[#EF4444] text-white cursor-pointer
+
+}
+.confirmNo {
+  @apply px-4 py-2 rounded border border-Secondary text-Secondary cursor-pointer transition-all hover:bg-Secondary hover:text-white duration-300;
+}
