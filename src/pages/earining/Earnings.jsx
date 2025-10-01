@@ -11,7 +11,10 @@ import {
   ReferenceLine,
 } from "recharts";
 import { Select, MenuItem } from "@mui/material";
+import { users } from "./data";
 
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 const yearlyData = {
   2024: [
@@ -46,73 +49,22 @@ const yearlyData = {
 
 const Earnings = () => {
   const [selectedYear, setSelectedYear] = useState("2024");
+  const [currentPage, setCurrentPage] = useState(1);
+  const perUsersPage = 5;
 
   const handleYearChange = (e) => {
     setSelectedYear(e.target.value);
   };
 
-  const users = [
-    {
-      id: "01",
-      name: "Robert Fox",
-      email: "fox@email",
-      pay: "Stripe",
-      amount:"20.99",
-      trId: "TRX-84921A",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=1", // placeholder avatar
-    },
-    {
-      id: "02",
-      name: "Robert Fox",
-      email: "fox@email",
-      pay: "Stripe",
-      amount:"20.99",
-      trId: "TRX-84921A",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=2",
-    },
-    {
-      id: "03",
-      name: "Robert Fox",
-      email: "fox@email",
-      pay: "Stripe",
-      amount:"20.99",
-      trId: "TRX-84921A",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=3",
-    },
-    {
-      id: "04",
-      name: "Robert Fox",
-      email: "fox@email",
-      pay: "Stripe",
-      amount:"20.99",
-      trId: "TRX-84921A",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=4",
-    },
-    {
-      id: "05",
-      name: "Robert Fox",
-      email: "fox@email",
-      pay: "Stripe",
-      amount:"20.99",
-      trId: "TRX-84921A",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=5",
-    },
-    {
-      id: "06",
-      name: "Robert Fox",
-      email: "fox@email",
-      pay: "Stripe",
-      amount:"20.99",
-      trId: "TRX-84921A",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=6",
-    },
-  ];
+  //pagination
+  const totalPages = Math.ceil(users.length / perUsersPage);
+  const startIndex = (currentPage - 1) * perUsersPage;
+  const endIndex = startIndex + perUsersPage;
+  const paginatedUsers = users.slice(startIndex, endIndex);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
 
   return (
     <div className="p-4 bg-Primary min-h-[calc(100vh-100px)] px-4">
@@ -171,29 +123,73 @@ const Earnings = () => {
                 </tr>
               </thead>
               <tbody className="bg-white text-[#154452]">
-                {users.map((user) => (
-                  <tr key={user.id} className="border-b border-[#E8E8F5]">
-                    <td className="px-4 py-3">{user.id}</td>
-                    <td className="px-4 py-3 flex items-center gap-x-2">
-                      <img
-                        src={user.avatar}
-                        alt={user.name}
-                        className="w-8 h-8 rounded-full"
-                      />
-                      {user.name}
+                {paginatedUsers.length > 0 ? (
+                  paginatedUsers.map((user) => (
+                    <tr key={user.id} className="border-b border-[#E8E8F5]">
+                      <td className="px-4 py-3">{user.id}</td>
+                      <td className="px-4 py-3 flex items-center gap-x-2">
+                        <img
+                          src={user.avatar}
+                          alt={user.name}
+                          className="w-8 h-8 rounded-full"
+                        />
+                        {user.name}
+                      </td>
+                      <td className="px-4 py-3">{user.email}</td>
+                      <td className="px-4 py-3">{user.date}</td>
+                      <td className="px-4 py-3">{user.pay}</td>
+                      <td className="px-4 py-3">{user.trId}</td>
+                      <td className="px-4 py-3">$ {user.amount}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td
+                      colSpan="7"
+                      className="px-4 py-6 text-center text-gray-500 font-medium"
+                    >
+                      No users found
                     </td>
-                    <td className="px-4 py-3">{user.email}</td>
-                    <td className="px-4 py-3">{user.date}</td>
-                    <td className="px-4 py-3">{user.pay}</td>
-                    <td className="px-4 py-3">{user.trId}</td>
-                    <td className="px-4 py-3">$ {user.amount}</td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
         </div>
+
+         {/* Pagination Footer */}
+        {totalPages > 1 && (
+          <div className="mt-4 flex items-center justify-between px-4 pb-4">
+            {/* Left: showing X–Y of Z */}
+            <div className="text-lg text-Secondary">
+              SHOWING {startIndex + 1}–{Math.min(endIndex, users.length)}{" "}
+              OF {users.length}
+            </div>
+
+            {/* Right: MUI Pagination */}
+            <Stack spacing={2}>
+              <Pagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handlePageChange}
+                shape="rounded"
+                siblingCount={0}
+                boundaryCount={1}
+                sx={{
+                  "& .MuiPaginationItem-root": {
+                    color: "#727272", // text color
+                  },
+                  "& .Mui-selected": {
+                    backgroundColor: "#E27B4F !important", // active page bg
+                    color: "white", // active page text
+                  },
+                }}
+              />
+            </Stack>
+          </div>
+        )}
       </div>
+
     </div>
   );
 };
