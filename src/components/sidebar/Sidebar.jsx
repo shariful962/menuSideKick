@@ -180,9 +180,9 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       {/* Logout Confirmation Modal */}
       {showLogoutModal && (
         <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-60">
-          <div className="bg-white rounded-lg p-6 w-[90%] max-w-md shadow-lg text-center">
-            <h2 className="text-xl font-semibold mb-4">Confirm Logout</h2>
-            <p className="mb-6">Are you sure you want to logout?</p>
+          <div className="bg-white rounded-lg p-6 w-[90%] max-w-[350px] shadow-lg text-center">
+            
+            <p className="mb-6">Confirm logging out!</p>
             <div className="flex justify-center gap-4">
              
               <button
