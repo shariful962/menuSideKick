@@ -1,65 +1,17 @@
 import { Search } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+import { users } from "./data";
 
 const Subscription = () => {
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const perUsersPage = 5;
 
-  const users = [
-    {
-      id: "01",
-      name: "Robert Fox",
-      email: "fox@email",
-      status: "Paid",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=1", // placeholder avatar
-      plan: "Monthly"
-    },
-    {
-      id: "02",
-      name: "Mark Henry",
-      email: "markhenry@email",
-      status: "Paid",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=2",
-      plan: "Monthly"
-    },
-    {
-      id: "03",
-      name: "Shifat",
-      email: "shifat@email",
-      status: "Paid",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=3",
-      plan: "6 Months"
-    },
-    {
-      id: "04",
-      name: "John Doe",
-      email: "john doe@email",
-      status: "Paid",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=4",
-      plan: "6 Months"
-    },
-    {
-      id: "05",
-      name: "Robert Fox",
-      email: "fox@email",
-      status: "Expired",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=5",
-      plan: "Yearly"
-    },
-    {
-      id: "06",
-      name: "Mark Henry",
-      email: "markhenry@email",
-      status: "Expired",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=6",
-      plan: "Yearly"
-    },
-  ];
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
 
   const filterUsers = users.filter(
     (user) =>
@@ -67,8 +19,17 @@ const Subscription = () => {
       user.email.toLowerCase().includes(search.toLowerCase()) ||
       user.plan.toLowerCase().includes(search.toLowerCase()) ||
       user.status.toLowerCase().includes(search.toLowerCase())
-
   );
+
+  //pagination
+  const totalPages = Math.ceil(filterUsers.length / perUsersPage);
+  const startIndex = (currentPage - 1) * perUsersPage;
+  const endIndex = startIndex + perUsersPage;
+  const paginatedUsers = filterUsers.slice(startIndex, endIndex);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
 
   return (
     <div className="p-4 bg-Primary min-h-[calc(100vh-100px)] px-4">
@@ -116,12 +77,11 @@ const Subscription = () => {
                   <th className="hidden md:table-cell px-4 py-3">
                     Expiration Date
                   </th>
-                  
                 </tr>
               </thead>
               <tbody className="bg-white text-[#154452]">
-                {filterUsers.length > 0 ? (
-                  filterUsers.map((user) => (
+                {paginatedUsers.length > 0 ? (
+                  paginatedUsers.map((user) => (
                     <tr key={user.id} className="border-b border-[#E8E8F5]">
                       <td className="px-4 py-3">{user.id}</td>
                       <td className="px-4 py-3 flex items-center gap-x-2">
@@ -133,7 +93,15 @@ const Subscription = () => {
                         {user.name}
                       </td>
                       <td className="px-4 py-3">{user.email}</td>
-                      <td className= {`px-4 py-3 ${user.status === 'Paid' ? "text-[#10B981]" : "text-[#EF4444]"}`}>{user.status}</td>
+                      <td
+                        className={`px-4 py-3 ${
+                          user.status === "Paid"
+                            ? "text-[#10B981]"
+                            : "text-[#EF4444]"
+                        }`}
+                      >
+                        {user.status}
+                      </td>
                       <td className="hidden md:table-cell px-4 py-3">
                         {user.plan}
                       </td>
@@ -153,14 +121,40 @@ const Subscription = () => {
             </table>
           </div>
         </div>
+        {/* Pagination Footer */}
+        {totalPages > 1 && (
+          <div className="mt-4 flex items-center justify-between px-4">
+            {/* Left: showing X–Y of Z */}
+            <div className="text-lg text-Secondary">
+              SHOWING {startIndex + 1}–{Math.min(endIndex, filterUsers.length)}{" "}
+              OF {filterUsers.length}
+            </div>
+
+            {/* Right: MUI Pagination */}
+            <Stack spacing={2}>
+              <Pagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handlePageChange}
+                shape="rounded"
+                siblingCount={0}
+                boundaryCount={1}
+                sx={{
+                  "& .MuiPaginationItem-root": {
+                    color: "#727272", // text color
+                  },
+                  "& .Mui-selected": {
+                    backgroundColor: "#E27B4F !important", // active page bg
+                    color: "white", // active page text
+                  },
+                }}
+              />
+            </Stack>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 export default Subscription;
-
-
-
-
-
