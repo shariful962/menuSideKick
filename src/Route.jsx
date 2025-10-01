@@ -15,6 +15,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import ChangePassword from "./pages/settings/ChangePassword"
 import Privacy from "./pages/settings/Privacy";
 import TermsAndCondition from "./pages/settings/TermsAndCondition";
+import BlockUsers from "./pages/block/BlockUsers";
 
 
 
@@ -36,6 +37,7 @@ export const router = createBrowserRouter([
         {index: true, element: <Navigate to="/signin" replace /> },
         {path: 'dashboard', Component: Dashboard},
         {path: 'user', Component: Users},
+        {path: 'user/block', Component: BlockUsers},
         {path: 'earn', Component: Earnings},
         {path: 'subscription', Component: Subscription},
         {path: 'category', Component: Category},

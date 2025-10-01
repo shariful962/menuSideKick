@@ -3,6 +3,7 @@ import { Search } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { FaBan } from "react-icons/fa";
 import { LuEye } from "react-icons/lu";
+import { FaUndo } from "react-icons/fa";
 import UserModal from "./UserModal";
 import ConfirmBlockModal from "./ConfirmBlockModal";
 import { users } from "./data";
@@ -11,7 +12,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { Link } from "react-router";
 
-const Users = () => {
+const BlockUsers = () => {
   const [search, setSearch] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -65,7 +66,7 @@ const Users = () => {
       <div className="bg-white shadow-custom rounded-[10px] mt-5 min-h-[calc(100vh-155px)]">
         <div className="bg-Secondary px-6 py-4 rounded-tl-[10px] rounded-tr-[10px]">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
-            <h2 className="title text-white">User List</h2>
+            <h2 className="title text-white">Blocked List</h2>
             <div className="flex flex-col md:flex-row gap-y-2 gap-x-8">
               <div className="flex items-center w-full md:w-[300px] h-[42px] px-3 py-2 bg-white border border-Primary rounded-sm">
                 <Search className="w-5 h-5 mr-2 text-Secondary" />
@@ -77,9 +78,7 @@ const Users = () => {
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
-              <Link to={'/user/block'} className="h-[42px] px-6 w-max py-2 bg-white text-Secondary rounded font-bold">
-                Blocked Users
-              </Link>
+             
             </div>
           </div>
         </div>
@@ -118,9 +117,9 @@ const Users = () => {
                       {user.date}
                     </td>
                     <td className="px-4 py-3 flex items-center gap-x-3">
-                      <FaBan
-                        size={20}
-                        className="text-Secondary cursor-pointer"
+                      <FaUndo
+                        size={18}
+                        className="text-[#154452] cursor-pointer"
                         onClick={() => handleRequestBlock(user)}
                       />
                       <LuEye
@@ -191,4 +190,5 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default BlockUsers;
+

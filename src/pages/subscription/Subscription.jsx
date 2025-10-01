@@ -43,7 +43,7 @@ const Subscription = () => {
             <div className="flex flex-col md:flex-row gap-y-2  gap-x-8">
               {/* search button  */}
               <div className="flex items-center w-full md:w-[300px] h-[42px] px-3 py-2 bg-white border border-Primary  rounded-sm">
-                <Search className=" w-5 h-5 mr-2" />
+                <Search className=" w-5 h-5 mr-2 text-Secondary" />
                 <input
                   type="text"
                   placeholder="Search User"

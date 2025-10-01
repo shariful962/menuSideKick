@@ -2,66 +2,28 @@ import { Search } from "lucide-react";
 import React, { useState } from "react";
 import { LuEye } from "react-icons/lu";
 import FeedbackModal from "./FeedbackModal";
+import { users } from "./data";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 const Feedback = () => {
   const [selectedUser, setSelectedUser] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const perUsersPage = 5;
 
-  const users = [
-    {
-      id: "01",
-      name: "Robert Fox",
-      email: "fox@email",
-      phone: "+123124",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=1",
-      msg: `Vel et commodo et scelerisque aliquam. Sed libero, non praesent felis, sem eget venenatis neque. Massa tincidunt tempor a nisl eu mauris lectus. Amet lobortis auctor at egestas aenean. Rhoncus cras nunc lectus morbi duis sem diam. Sed gravida eget semper vulputate vitae.`
-    },
-    {
-      id: "02",
-      name: "Mark Henry",
-      email: "markhenry@email",
-      phone: "+123124",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=2",
-      msg: `Vel et commodo et scelerisque aliquam. Sed libero, non praesent felis, sem eget venenatis neque. Massa tincidunt tempor a nisl eu mauris lectus. Amet lobortis auctor at egestas aenean. Rhoncus cras nunc lectus morbi duis sem diam. Sed gravida eget semper vulputate vitae.`
-    },
-    {
-      id: "03",
-      name: "Shifat",
-      email: "shifat@email",
-      phone: "+123124",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=3",
-      msg: `Vel et commodo et scelerisque aliquam. Sed libero, non praesent felis, sem eget venenatis neque. Massa tincidunt tempor a nisl eu mauris lectus. Amet lobortis auctor at egestas aenean. Rhoncus cras nunc lectus morbi duis sem diam. Sed gravida eget semper vulputate vitae.`
-    },
-    {
-      id: "04",
-      name: "John Doe",
-      email: "john@email",
-      phone: "+123124",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=4",
-      msg: `Vel et commodo et scelerisque aliquam. Sed libero, non praesent felis, sem eget venenatis neque. Massa tincidunt tempor a nisl eu mauris lectus. Amet lobortis auctor at egestas aenean. Rhoncus cras nunc lectus morbi duis sem diam. Sed gravida eget semper vulputate vitae.`
-    },
-      {
-      id: "05",
-      name: "Farabi Hasan",
-      email: "farabihasan@email",
-      phone: "+123124",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=5",
-      msg: `Vel et commodo et scelerisque aliquam. Sed libero, non praesent felis, sem eget venenatis neque. Massa tincidunt tempor a nisl eu mauris lectus. Amet lobortis auctor at egestas aenean. Rhoncus cras nunc lectus morbi duis sem diam. Sed gravida eget semper vulputate vitae.`
-    },
-      {
-      id: "06",
-      name: "John Doe",
-      email: "john@email",
-      phone: "+123124",
-      date: "02-24-2024",
-      avatar: "https://i.pravatar.cc/40?img=6",
-      msg: `Vel et commodo et scelerisque aliquam. Sed libero, non praesent felis, sem eget venenatis neque. Massa tincidunt tempor a nisl eu mauris lectus. Amet lobortis auctor at egestas aenean. Rhoncus cras nunc lectus morbi duis sem diam. Sed gravida eget semper vulputate vitae.`
-    },
-  ];
+
+  //pagination 
+  const totalPages = Math.ceil(users.length / perUsersPage);
+  const startIndex = (currentPage - 1) * perUsersPage;
+  const endIndex = startIndex + perUsersPage;
+  const paginatedUsers = users.slice (startIndex, endIndex);
+
+
+  const handlePageChange = (event, value) =>{
+    setCurrentPage(value)
+  }
+
+  
 
 
 
@@ -88,8 +50,8 @@ const Feedback = () => {
               </tr>
             </thead>
             <tbody className="text-[#154452]">
-              {users.length > 0 ? (
-                users.map((user) => (
+              {paginatedUsers.length > 0 ? (
+                paginatedUsers.map((user) => (
                   <tr key={user.id} className="border-b border-[#E8E8F5]">
                     <td className="px-4 py-3">{user.id}</td>
                     <td className="px-4 py-3 flex items-center gap-x-2">
@@ -127,6 +89,37 @@ const Feedback = () => {
             </tbody>
           </table>
         </div>
+        {/* Pagination Footer */}
+        {totalPages > 1 && (
+          <div className="mt-4 flex items-center justify-between px-4">
+            {/* Left: showing X–Y of Z */}
+            <div className="text-lg text-Secondary">
+              SHOWING {startIndex + 1}–{Math.min(endIndex, users.length)}{" "}
+              OF {users.length}
+            </div>
+
+            {/* Right: MUI Pagination */}
+            <Stack spacing={2}>
+              <Pagination
+                count={totalPages}
+                page={currentPage}
+                onChange={handlePageChange}
+                shape="rounded"
+                siblingCount={0}
+                boundaryCount={1}
+                sx={{
+                  "& .MuiPaginationItem-root": {
+                    color: "#727272", // text color
+                  },
+                  "& .Mui-selected": {
+                    backgroundColor: "#E27B4F !important", // active page bg
+                    color: "white", // active page text
+                  },
+                }}
+              />
+            </Stack>
+          </div>
+        )}
       </div>
 
       {/* Modal Component */}
@@ -140,3 +133,6 @@ const Feedback = () => {
 };
 
 export default Feedback;
+
+
+
